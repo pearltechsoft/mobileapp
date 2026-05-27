@@ -1,0 +1,232 @@
+Steps For Expo App Packaging
+
+1.Create An expo with sdk version 46 by using The Following command
+(First check node and npm versions)
+
+node -v
+npm -v
+
+Then create app:
+
+npx create-expo-app@latest ____________ --template expo-template-blank@sdk-46
+                           App Name Here
+
+2.Create(signup) An Expo Dev Account In these Website and remember Credentials
+https://expo.dev/
+
+3.Now Open Command prompt and type the command
+
+npm install -g eas-cli
+
+4. After Installing Above One type the next command
+
+eas login
+
+5.It will ask your credentials Give as per your previous expo dev account
+(After login verify account)
+
+eas whoami
+
+6.In The Command Prompt Navigate to your App's root Directory(which you have created at first step) and type the following command
+
+cd AppName
+npm install
+npx expo doctor
+
+7.Initialize EAS Project (Important step)
+
+eas init
+
+(If project already linked, you may see message — continue)
+
+8.Run the project once to check errors
+
+npx expo start
+
+9.In The Command Prompt Navigate to your App's root Directory and type the following command
+(If error occurs you can skip this step)
+
+eas build:configure
+
+10.Now Type the following commands as required
+
+for Android APk file (for testing)
+eas build -p android --profile preview
+
+for Android AAB File (for Play Store)
+eas build --platform android
+
+for ios file
+eas build --platform ios
+
+for All platforms at the same Time
+eas build --platform all
+
+(First time build it may ask for package name and keystore → select automatic)
+
+11. As build process is going On open the browser and go this page and if necessary Login With previous expo dev account
+    https://expo.dev/
+    (You will also get download link in terminal)
+
+12.In The dashboard project Section You can see your App Name open that and if build is completed you can download your app from there or else wait for build to complete
+
+Additional Important Steps:
+
+- Update app.json / app.config.js before build
+
+{
+  "expo": {
+    "name": "AppName",
+    "slug": "app-name",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.yourcompany.appname"
+    }
+  }
+}
+
+- Clear cache if errors occur
+
+npx expo start -c
+
+- If eas build:configure fails directly run:
+
+eas build
+
+- After SDK downgrade always run:
+
+npm install
+npx expo doctor
+
+Problems That can be rised When Downgrading:
+
+1.Regarding The react navigation
+solution :- try to install the react navigation version of
+"@react-navigation/native": "^6.1.8",
+"@react-navigation/native-stack": "^6.9.14",
+Also install required dependencies:
+
+npm install react-native-screens react-native-safe-area-context
+
+for compatible module versions visit package.json in userApp Repo
+
+2. Regarding The file upload
+   solution :-
+
+The issue with your code is occurring because you're trying to access newData.assets[0], but DocumentPicker.getDocumentAsync() does not return an object with an assets property like an image picker would. Instead, it returns an object with properties like uri, name, and type directly.
+
+You don't need to JSON.stringify and JSON.parse the result. Here’s how to fix the code:
+
+Directly access the properties from the result: The result from DocumentPicker.getDocumentAsync() will contain the properties directly.
+Fix the uploadFile function call: Since the result is not wrapped in an assets array, you can directly use result.uri and result.name.
+
+Example:
+
+const result = await DocumentPicker.getDocumentAsync();
+
+if (result.type === 'success') {
+  uploadFile(result.uri, result.name);
+}
+
+(Note: In newer SDK versions assets array is used, but in SDK 46 use direct properties)
+
+for detailed code visit homescreen2.js from userapp repo
+
+Errors That can be Occurred While Building & Solutions:
+
+1.Regarding Login / Permission Error
+solution :-
+
+eas logout
+eas login
+eas whoami
+
+2.Regarding Project not linked Error
+solution :-
+
+eas init
+
+3.Regarding eas build:configure Error
+solution :-
+
+eas build
+
+4.Regarding Dependency Issues
+solution :-
+
+npm install
+npx expo doctor
+
+5.Regarding SDK Version Mismatch
+solution :-
+
+npx expo doctor
+
+6.Regarding Node Version Issue
+solution :-
+
+node -v
+
+7.Regarding Build Failed (Unknown Error)
+solution :-
+
+npx expo start -c
+eas build
+
+8.Regarding Metro / Bundler Issues
+solution :-
+
+npx expo start -c
+
+9.Regarding Missing Dependencies
+solution :-
+
+npm install
+
+10.Regarding React Navigation Errors
+solution :-
+
+npm install @react-navigation/native@^6.1.8
+npm install @react-navigation/native-stack@^6.9.14
+npm install react-native-screens react-native-safe-area-context
+
+11.Regarding Keystore / Credentials Error
+solution :-
+
+eas credentials
+
+12.Regarding Network / Timeout Error
+solution :-
+Retry:
+
+eas build
+
+13.Regarding Build Stuck or Slow
+solution :-
+Check status in https://expo.dev/
+
+14.Regarding App Not Installing (APK)
+solution :-
+Enable "Install from unknown sources"
+
+15.Regarding Expo Doctor Errors
+solution :-
+
+npx expo doctor --fix-dependencies
+
+Final Tip:
+
+npm install
+npx expo doctor
+npx expo start -c
+eas build
+
+This fixes most of the issues
+
+Common Issues:
+
+Compressing project files and uploading to EAS Build. Learn more: https://expo.fyi/eas-build-archive
+Failed to upload the project tarball to EAS Build
+
+Reason: EPERM: operation not permitted, rmdir 'C:\Users\YASOKE~1\AppData\Local\Temp\eas-cli-nodejs\801fb473-123d-4f99-a810-9ececafd6ce0-shallow-clone\Styles'
+    Error: build command failed.

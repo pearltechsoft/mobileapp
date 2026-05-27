@@ -1,0 +1,70 @@
+Steps to setup Mobile App Dev Environment
+
+1. Install VSCode
+2. Install NodeJS
+3. Create base app 
+4. Install postman
+5. Install pgadmin
+
+Steps For Expo App Packaging
+
+1.Create An expo with sdk version 46 by using The Following command
+npx create-expo-app@latest ____________ --template expo-template-blank@sdk-46
+                           App Name Here
+
+2.Create(signup) An Expo Dev Account In these Website and remember Credentials
+https://expo.dev/
+
+3.Now Open Command prompt and type the command
+npm install -g eas-cli
+
+4. After Installing Above One type the next command
+eas login
+
+5.It will ask your credentials Give as per your previous expo dev account
+
+6.In The Command Prompt Navigate to your App's root Directory(which you have created at first step) and type the follow12ing command
+eas build:configure
+
+7.Now Type the following commands as required
+ 
+	for Android APk file
+	eas build -p android --profile preview
+
+	for Android AAB File
+	eas build --platform android
+
+	for ios file
+	eas build --platform ios
+
+	for All platforms at the same Time
+	eas build --platform all
+	
+8. As build process is going On open the browser and go this page and if necessary Login With previous expo dev account
+https://expo.dev/
+https://expo.dev/accounts/pearltechsoft
+pearltechsoft@gmail.com / N******s
+	
+9.In The dashboard project Section You can see your App Name open that and if build is completed you can download your app from there or else wait for build to complete
+
+https://play.google.com/console
+
+Problems That can be rised When Downgrading:
+
+1.Regarding The react navigation
+solution :- try to install the react navigation version of 
+		 "@react-navigation/native": "^6.1.8",
+   		 "@react-navigation/native-stack": "^6.9.14",
+	    for compatible module versions visit package.json in userApp Repo
+2. Regarding The file upload
+solution :- 
+The issue with your code is occurring because you're trying to access newData.assets[0], but DocumentPicker.getDocumentAsync() does not return an object with an assets property like an image picker would. Instead, it returns an object with properties like uri, name, and type directly.
+
+You don't need to JSON.stringify and JSON.parse the result. Here’s how to fix the code:
+
+Directly access the properties from the result: The result from DocumentPicker.getDocumentAsync() will contain the properties directly.
+Fix the uploadFile function call: Since the result is not wrapped in an assets array, you can directly use result.uri and result.name.
+for detailed code visit homescreen2.js from userapp repo
+
+
+ 
