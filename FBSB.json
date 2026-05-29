@@ -1,0 +1,35 @@
+{
+  "info": {
+    "_postman_id": "ad3eae46-ca52-4931-b282-73573e28f2b8",
+    "name": "FBSB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37510349",
+    "_collection_link": "https://go.postman.co/collection/37510349-ad3eae46-ca52-4931-b282-73573e28f2b8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "magiclink",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "jwt",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "securedata",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
