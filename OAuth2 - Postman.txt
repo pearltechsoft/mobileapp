@@ -3,7 +3,7 @@ Request:
 http://localhost:8080/oauth2/authorize?response_type=code&client_id=my-client-app2&redirect_uri=http://localhost:8080/login/oauth2/code/my-client&scope=read&state=123
 
 Response:
-http://localhost:3000/callback?code=M8wvm-PlUgxZftu2ET4eE4UVWoAWblzv6Scu92cindNyIGJjPqsyicNAni2eqx00rIpE1QT3OaTYivyYyZmZhfAldvOF9ha3bL6QHzP0aGZ-5J46-seQt4pYl6Pc7fQA&state=1239
+http://localhost:3000/callback?code=M8wvm-PlUgxZftu2ET4eE4UVWoAWblzv6Scu92cindNyIGJjPqsyicNAni2eqx00rIpE1QT3OaTYivyYyZmZhfAldvOF9ha3bL6QHzP0aGZ-5J46-seQt4pYl6Pc7fQA&state=123
 
 curl --location 'http://localhost:8080/oauth2/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
