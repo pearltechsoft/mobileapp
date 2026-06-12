@@ -8,10 +8,11 @@ export default function HomeScreen() {
       <View style={styles.cardContainer}>
         {/* Testing your dynamic payment engine live with ID 2 */}
         <UPIPaymentQR 
-          amount="1.00" 
+          amount="4.00" 
           bookingId="TEST003" 
-          customerName="A Pavithra" 
-          upiId="6302267557@axl"  // <-- This is your second PhonePe ID
+          customerName="Amk Naidu" 
+          upiId="6302267557@axl"  
+          accountName="Murali Krishna Naidu"
         />
       </View>
     </SafeAreaView>
