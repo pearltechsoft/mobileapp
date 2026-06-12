@@ -10,9 +10,9 @@ export default function HomeScreen() {
         <UPIPaymentQR 
           amount="4.00" 
           bookingId="TEST003" 
-          customerName="Amk Naidu" 
-          upiId="6302267557@axl"  
-          accountName="Murali Krishna Naidu"
+          customerName="Test User1" 
+          upiId="78xxxxxxxx@xyz"  
+          accountName="Reciever1"
         />
       </View>
     </SafeAreaView>
