@@ -2,10 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-const UPIPaymentQR = ({ amount, bookingId, customerName }) => {
-  const merchantUPI = "test@upi"; 
-  const merchantName = "Booking App";
-  const upiURL = `upi://pay?pa=${merchantUPI}&pn=${encodeURIComponent(merchantName)}&tn=${encodeURIComponent('Booking ' + bookingId)}&am=${amount}&cu=INR&tr=${bookingId}`;
+// Added upiId and accountName as dynamic props!
+const UPIPaymentQR = ({ amount, bookingId, customerName, upiId, accountName }) => {
+  
+  // Falls back to a safe placeholder ONLY if the data fails to pass through
+  const targetUPI = upiId || "test@upi"; 
+  const targetName = accountName || customerName || "Merchant";
+
+  const upiURL = `upi://pay?pa=${targetUPI}&pn=${encodeURIComponent(targetName)}&tn=${encodeURIComponent('Booking ' + bookingId)}&am=${amount}&cu=INR&tr=${bookingId}`;
 
   return (
     <View style={styles.container}>
@@ -30,5 +34,4 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 15, color: '#444', fontWeight: '500' },
   footer: { fontSize: 12, color: '#aaa', marginTop: 10 },
 });
-
 export default UPIPaymentQR;
