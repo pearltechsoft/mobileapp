@@ -2,10 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-// Added upiId and accountName as dynamic props!
 const UPIPaymentQR = ({ amount, bookingId, customerName, upiId, accountName }) => {
   
-  // Falls back to a safe placeholder ONLY if the data fails to pass through
   const targetUPI = upiId || "test@upi"; 
   const targetName = accountName || customerName || "Merchant";
 
@@ -17,7 +15,19 @@ const UPIPaymentQR = ({ amount, bookingId, customerName, upiId, accountName }) =
       <Text style={styles.amount}>₹{amount}</Text>
       
       <View style={styles.qrContainer}>
-        <QRCode value={upiURL} size={220} backgroundColor="white" color="black" />
+        {/* WE REMOVED ALL THE OVERLAY VIEWS AND CUSTOM IMAGES. JUST CLEAN QR PROPERTIES NOW */}
+        <QRCode 
+          value={upiURL} 
+          size={220} 
+          backgroundColor="white" 
+          color="black" 
+          
+          // The library natively supports embedding the asset directly
+          logo={require('../assets/company-logo1.jpeg')} 
+          logoSize={65}                 // A slightly smaller, professional bounding square
+          logoBackgroundColor="white"   // A natural, tight padding background built into the grid
+          logoMargin={3}                // A clean, small gap that respects the QR dots
+        />
       </View>
 
       <Text style={styles.subtitle}>Customer: {customerName}</Text>
@@ -34,4 +44,5 @@ const styles = StyleSheet.create({
   subtitle: { fontSize: 15, color: '#444', fontWeight: '500' },
   footer: { fontSize: 12, color: '#aaa', marginTop: 10 },
 });
+
 export default UPIPaymentQR;
